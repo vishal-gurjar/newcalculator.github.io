@@ -13,13 +13,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-sm-12">
-                
+
                 <div class="form-calc">
                     <h3 style="text-align: center; padding-bottom: 20px;">Calculator</h3>
                     <form id="total-amount">
+                        <input type="hidden" name="" value="" id="temp">
                         <div class="mb-3">
                           <label for="form-select" class="form-label">Wood Diameter</label>
-                          <select class="form-select" aria-label="Default select example" id="wood-diameter">
+                          <select class="form-select" aria-label="Default select example" id="wood-diameter" onchange="getSelectedDiameter();">
                             <option selected>Select diameter</option>
                             <option value="170">170</option>
                             <option value="260">260</option>
@@ -35,7 +36,7 @@
                             <option value="550">550</option>
                             <option value="650">650</option>
                             <option value="692">692</option>
-                            
+
                           </select>
                         </div>
                         <div class="mb-3">
@@ -72,8 +73,8 @@
                         <p class="output-heading">Total Creasing</p>
                         <p class="output-value" id="totalCreasing">0</p>
                     </div>
-                    
-                    
+
+
                 </div>
                 <div class="row second-row">
                     <div class="col custom-card">
@@ -88,8 +89,8 @@
                         <p class="output-heading">WELDING</p>
                         <p class="output-value" id="welding">0</p>
                     </div>
-                    
-                    
+
+
                 </div>
                 <div class="row third-row">
                     <div class="col custom-card">
@@ -104,7 +105,7 @@
                         <p class="output-heading">TOTAL AMOUNT</p>
                         <p class="output-value" id="totalamount">0</p>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

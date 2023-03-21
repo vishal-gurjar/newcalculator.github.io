@@ -2,14 +2,106 @@
 
 document.getElementById("total-amount").addEventListener("submit",computeAmount);
 
+// const woodDiaPrice = {
+//   360 : "2550",
+//   370 : "2640",
+//   390 : "2760",
+//   410 : "2760",
+//   432 : "2910",
+//   487 : "3220"
+// }
+
+// const woodWorkHalfPeri = {
+//   360 : 560,
+//   370 : 570,
+//   390 : 590,
+//   410 : 640,
+//   432 : 690,
+//   487 : 775
+// }
+//
+// const woodWorkSemiPeri = {
+//   360 : 840,
+//   370 : 855,
+//   390 : 885,
+//   410 : 960,
+//   432 : 1035,
+//   487 : 1160
+// }
+
+
+
+function getSelectedDiameter(){
+  var selectedDiameter = document.getElementById("wood-diameter").value;
+  //console.log(selectedDiameter);
+  document.getElementById("temp").value = selectedDiameter;
+}
+
+
 function computeAmount(e){
 
+  const woodDiaPrice = {
+     360 : 2550,
+     370 : 2640,
+     390 : 2760,
+     410 : 2760,
+     432 : 2910,
+     487 : 3220
+   }
+  const woodWorkHalfPeri = {
+    360 : 560,
+    370 : 570,
+    390 : 590,
+    410 : 640,
+    432 : 690,
+    487 : 775
+  }
+
+  const woodWorkSemiPeri = {
+    360 : 840,
+    370 : 855,
+    390 : 885,
+    410 : 960,
+    432 : 1035,
+    487 : 1160
+  }
+
+    ////////////////////////////////////////////////////////////////////////
     const cutting = Number(document.getElementById('cutting').value);
     const creasing = Number(document.getElementById('creasing').value);
     const width = Number(document.getElementById('width').value);
     const length = Number(document.getElementById('length').value);
+    const totalWidth = width + 120;
+    const totalLength = length + 250;
+    //console.log(totalWidth);
+    //console.log(totalLength);
 
-    console.log(cutting,creasing,width,length);
+    ////////////////////////////////////////////////////////////////////////
+    // Total Wood Calculation
+
+    const tempDiaValue = Number(document.getElementById('temp').value);
+    //console.log(tempDiaValue);
+    //console.log(woodWorkHalfPeri[tempDiaValue]);
+
+    if( totalWidth < woodWorkHalfPeri[tempDiaValue] ){
+      var woodPrice = (woodDiaPrice[tempDiaValue] * 1)*(totalLength/1000);
+      console.log(woodPrice);
+    }else if ( totalWidth >= woodWorkHalfPeri[tempDiaValue] && totalWidth <= woodWorkSemiPeri[tempDiaValue] ) {
+      var woodPrice = (woodDiaPrice[tempDiaValue] * 1.5)*(totalLength/1000);
+      console.log(woodPrice);
+    }else if ( totalWidth > woodWorkSemiPeri[tempDiaValue]) {
+      var woodPrice = (woodDiaPrice[tempDiaValue] * 2)*(totalLength/1000);
+      console.log(woodPrice);
+    }
+
+    console.log(woodPrice);
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////
+
+    //console.log(cutting,creasing,width,length);
 
     // Striping Calculation
 
@@ -20,7 +112,7 @@ function computeAmount(e){
 
     const totalCutting = Math.round(((cutting+stripping)/1000)*600);
     document.getElementById('totalCutting').innerText = totalCutting;
-    console.log(totalCutting);
+    //console.log(totalCutting);
 
     // Total Creasing Calculation
 
@@ -54,16 +146,21 @@ function computeAmount(e){
     const laserCutting = Math.round(((totalCutting + totalCreasing)/1000)*210);
     document.getElementById('lasercutting').innerText = laserCutting;
 
+    // Total Amount Calculation
 
-     // Total Amount Calculation
+     const totalAmount = Math.round((totalCutting + totalCreasing + alluminiumSlug + rubberCalc + weldingCalc + fittingCalc + laserCutting + woodPrice));
+     console.log(totalAmount);
+    document.getElementById('totalamount').innerText = totalAmount;
 
 
 
 
 
 
-   
-    
+
+
+
+
 
 
 
